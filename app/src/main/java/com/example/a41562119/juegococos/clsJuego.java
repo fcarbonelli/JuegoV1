@@ -256,7 +256,7 @@ public class clsJuego {
             return Devolver;
 
         }
-        boolean EstaEntre(int NumeroAComparar, int NumeroMenor, int NumeroMayor){
+        boolean EstaEntre(int NumeropAComparar, int NumeroMenor, int NumeroMayor){
             boolean Devolver;
 
             if (NumeroMenor>NumeroMayor){
