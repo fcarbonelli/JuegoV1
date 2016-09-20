@@ -1,5 +1,7 @@
 package com.example.a41562119.juegococos;
 
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -35,6 +37,7 @@ import java.util.TimerTask;
 public class clsJuego {
     CCGLSurfaceView _VistaDelJuego;
     CCSize PantallaDelDispositivo;
+    Context _ContextoDelJuego;
 
     Sprite naveJugador,naveEnemiga, ImagenFondo;
     Label lblTitulo;
@@ -43,8 +46,9 @@ public class clsJuego {
         _VistaDelJuego=_VistaDelJuego;
     }
 
-    public void ComenzarJuego(){
+    public void ComenzarJuego(CCGLSurfaceView _VistaDelJuego, Context ContextoDelJuego){
 
+        _ContextoDelJuego = ContextoDelJuego;
         Director.sharedDirector().attachInView(_VistaDelJuego);
 
         PantallaDelDispositivo=Director.sharedDirector().displaySize();
@@ -104,6 +108,11 @@ public class clsJuego {
 
             this.setIsTouchEnabled(true);
 
+            MediaPlayer mpMusicaDeFondo;
+            mpMusicaDeFondo=MediaPlayer.create(_ContextoDelJuego, R.raw.musica);
+            mpMusicaDeFondo.start();
+            mpMusicaDeFondo.setVolume(0.5f,0.5f);
+            mpMusicaDeFondo.setLooping(true);
 
             TimerTask TareaPonerEnemigos;
             TareaPonerEnemigos = new TimerTask() {
@@ -256,7 +265,7 @@ public class clsJuego {
             return Devolver;
 
         }
-        boolean EstaEntre(int NumeropAComparar, int NumeroMenor, int NumeroMayor){
+        boolean EstaEntre(int NumeroAComparar, int NumeroMenor, int NumeroMayor){
             boolean Devolver;
 
             if (NumeroMenor>NumeroMayor){
